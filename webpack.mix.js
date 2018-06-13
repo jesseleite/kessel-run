@@ -2,13 +2,13 @@ const mix = require('laravel-mix');
 require('dotenv').config();
 
 // In an .env file, define the path to the addon folder you want to copy from.
-// eg. ADDON_FOLDER_PATH=/users/bob/miracle-grow/addons/MiracleGrow
-const addonFolder = process.env.ADDON_FOLDER_PATH;
+// eg. ADDON_PATH=/users/bob/miracle-grow/addons/MiracleGrow
+const addon = process.env.ADDON_PATH.replace(/\/$/, '');
 
 // And define the path to the Statamic site you want to test your addon in.
 // eg. STATAMIC_PATH=/users/bob/hairclub-for-men
 const statamic = process.env.STATAMIC_PATH;
 
-const addonFolderName = addonFolder.substr(addonFolder.lastIndexOf('/') + 1);
+const addonName = addon.substr(addon.lastIndexOf('/') + 1);
 
-mix.copyDirectory(`${addonFolder}`, `${statamic}/site/addons/${addonFolderName}`);
+mix.copyDirectory(`${addon}`, `${statamic}/site/addons/${addonName}`);
